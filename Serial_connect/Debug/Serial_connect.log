@@ -1,0 +1,39 @@
+﻿2013/06/13 18:10:15 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "c:\Users\Chelly\documents\visual studio 2010\Projects\Serial_connect\Serial_connect\Serial_connect.vcxproj" (build ターゲット)。
+     1>InitializeBuildStatus:
+         "Debug\Serial_connect.unsuccessfulbuild" のタッチ タスクを実行しています。
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt fifo.cpp main.cpp serial.cpp
+         serial.cpp
+     1>c:\users\chelly\documents\visual studio 2010\projects\serial_connect\serial_connect\serial.cpp(126): warning C4101: 'send_buf' : ローカル変数は 1 度も使われていません。
+     1>c:\users\chelly\documents\visual studio 2010\projects\serial_connect\serial_connect\serial.cpp(128): warning C4101: 'send_len' : ローカル変数は 1 度も使われていません。
+     1>c:\users\chelly\documents\visual studio 2010\projects\serial_connect\serial_connect\serial.cpp(128): warning C4101: 'send_size' : ローカル変数は 1 度も使われていません。
+         main.cpp
+     1>c:\users\chelly\documents\visual studio 2010\projects\serial_connect\serial_connect\main.cpp(32): warning C4996: 'kbhit': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _kbhit. See online help for details.
+                 c:\program files\microsoft visual studio 10.0\vc\include\conio.h(130) : 'kbhit' の宣言を確認してください。
+         fifo.cpp
+         コードを生成中...
+       ManifestResourceCompile:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Serial_connect.exe.embed.manifest.res" Debug\Serial_connect_manifest.rc 
+       Link:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\chelly\documents\visual studio 2010\Projects\Serial_connect\Debug\Serial_connect.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Serial_connect.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"c:\users\chelly\documents\visual studio 2010\Projects\Serial_connect\Debug\Serial_connect.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\chelly\documents\visual studio 2010\Projects\Serial_connect\Debug\Serial_connect.lib" /MACHINE:X86 Debug\Serial_connect.exe.embed.manifest.res
+         Debug\fifo.obj
+         Debug\main.obj
+         Debug\serial.obj
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Serial_connect.exe.embed.manifest" /manifest Debug\Serial_connect.exe.intermediate.manifest
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Serial_connect.exe.embed.manifest.res" Debug\Serial_connect_manifest.rc 
+       LinkEmbedManifest:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\chelly\documents\visual studio 2010\Projects\Serial_connect\Debug\Serial_connect.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Serial_connect.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"c:\users\chelly\documents\visual studio 2010\Projects\Serial_connect\Debug\Serial_connect.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\chelly\documents\visual studio 2010\Projects\Serial_connect\Debug\Serial_connect.lib" /MACHINE:X86 Debug\Serial_connect.exe.embed.manifest.res
+         Debug\fifo.obj
+         Debug\main.obj
+         Debug\serial.obj
+         Serial_connect.vcxproj -> c:\users\chelly\documents\visual studio 2010\Projects\Serial_connect\Debug\Serial_connect.exe
+       FinalizeBuildStatus:
+         ファイル "Debug\Serial_connect.unsuccessfulbuild" を削除しています。
+         "Debug\Serial_connect.lastbuildstate" のタッチ タスクを実行しています。
+     1>プロジェクト "c:\Users\Chelly\documents\visual studio 2010\Projects\Serial_connect\Serial_connect\Serial_connect.vcxproj" (build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:02.79
