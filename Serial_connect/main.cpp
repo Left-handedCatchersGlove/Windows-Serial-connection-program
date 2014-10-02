@@ -3,18 +3,21 @@
 #include <conio.h>
 #include <stdlib.h>
 #include "serial.h"
+
+#define DATA_SIZE 10
+
 int main (void)
 {
+  int i = 0;
   // シリアル通信の作成
   serial_t obj = serial_create("COM4",9600);
-
   // 受け取る配列
-  char buf[2];
+  char buf[DATA_SIZE];
   // 受け取ったバイト数
   char len;
 
   if ( obj == NULL ) {
-    fprintf(stderr,"オブジェクト生成に失敗");
+    fprintf(stderr,"オブジェクト生成に失敗\n");
     return EXIT_FAILURE;
   }
 
@@ -24,9 +27,10 @@ int main (void)
     len = serial_recv(obj,buf,sizeof(buf));
 
     //if (len) serial_send(obj,(unsigned char *)buf,len);
-    printf("but[0] : %d\n",buf[0]);
-    printf("buf[1] : %d\n",buf[1]);
-    //printf("buf[2] : %d\n\n",buf[2]);
+    for (i = 0; i < DATA_SIZE; i++)
+    {
+      printf("but[i] : %d\n", i, buf[i]);
+    }
     printf("len : %d\n", len);
     Sleep(100);
     if ( kbhit() )  break;
