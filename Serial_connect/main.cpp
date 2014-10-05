@@ -10,9 +10,11 @@ int main (void)
 {
   int i = 0;
   // シリアル通信の作成
-  serial_t obj = serial_create("COM4",9600);
+  serial_t obj = serial_create("COM3",9600);
   // 受け取る配列
-  char buf[DATA_SIZE];
+  char rbuf[DATA_SIZE];
+  char *sbuf = "test";
+  unsigned char testSbuf = 0x0F;
   // 受け取ったバイト数
   char len;
 
@@ -23,16 +25,21 @@ int main (void)
 
   while (1)
   {
+    /*------------- 受信部分 -------------*/
     // バイト数を受け取るとともに、データを受け取る
-    len = serial_recv(obj,buf,sizeof(buf));
+    len = serial_recv(obj, rbuf, sizeof(rbuf));
 
-    //if (len) serial_send(obj,(unsigned char *)buf,len);
-    for (i = 0; i < DATA_SIZE; i++)
+    for (i = 0; i < len; i++)
     {
-      printf("but[i] : %d\n", i, buf[i]);
+      printf("but[i] : %d\n", i, rbuf[i]);
     }
     printf("len : %d\n", len);
+
+    /*------------- 送信部分 -------------*/
+    //serial_send(obj, (unsigned char *)sbuf, sizeof(sbuf));
+    serial_send(obj, &testSbuf, sizeof(sbuf));
     Sleep(100);
+
     if ( kbhit() )  break;
   }
 

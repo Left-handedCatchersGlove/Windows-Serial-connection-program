@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "fifo.h"
 #include "serial.h"
 
@@ -45,7 +46,15 @@ serial_t serial_create(char *pname, unsigned int baud)
 	obj->pname = pname;
 	
 	// COMポートのハンドルを取得
-	obj->handle = CreateFile(pname,GENERIC_READ|GENERIC_WRITE,0,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL/*|FILE_FLAG_OVERLAPPED*/,NULL);
+	obj->handle = CreateFile(
+    pname,
+    GENERIC_READ|GENERIC_WRITE,
+    0,
+    NULL,
+    OPEN_EXISTING,
+    FILE_ATTRIBUTE_NORMAL,/*|FILE_FLAG_OVERLAPPED*/
+    NULL
+    );
 	if ( obj->handle == INVALID_HANDLE_VALUE ) {
 		free(obj);
 		return NULL;
@@ -58,7 +67,6 @@ serial_t serial_create(char *pname, unsigned int baud)
 		free(obj);
 		return NULL;
 	}
-	
 	
 	// COMポートのタイムアウト設定
 	ZeroMemory(&timeout,sizeof(COMMTIMEOUTS));
@@ -146,20 +154,21 @@ DWORD WINAPI serial_thread(LPVOID param)
 			recv_hold = FALSE;
 		}
 		
-		//// 送信
-		//if ( send_hold ) {
-		//	ret = WriteFile(obj->handle, send_buf, send_size, &send_len, NULL);
-		//	if ( ret == FALSE ) {
-		//		obj->msg = "WriteFile failed.";
-		//		break;
-		//	}
-		//	if ( send_size != send_len )	obj->msg = "WriteFile spilled some of q_send.";
-		//	send_hold = FALSE;
-		//} else if ( TryEnterCriticalSection(&obj->cs_send) ) {
-		//	send_size = fifo_read(obj->q_send, send_buf, sizeof(send_buf));
-		//	LeaveCriticalSection(&obj->cs_send);
-		//	send_hold = TRUE;
-		//}
+		// 送信
+		if ( send_hold ) {
+			ret = WriteFile(obj->handle, send_buf, send_size, &send_len, NULL);
+      //printf("OK");
+			if ( ret == FALSE ) {
+				obj->msg = "WriteFile failed.";
+				break;
+			}
+			if ( send_size != send_len )	obj->msg = "WriteFile spilled some of q_send.";
+			send_hold = FALSE;
+		} else if ( TryEnterCriticalSection(&obj->cs_send) ) {
+			send_size = fifo_read(obj->q_send, (char *)send_buf, sizeof(send_buf));
+			LeaveCriticalSection(&obj->cs_send);
+			send_hold = TRUE;
+		}
 		
 		Sleep(1);
 	}
