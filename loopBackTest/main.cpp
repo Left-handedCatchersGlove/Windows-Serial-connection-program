@@ -14,6 +14,8 @@ unsigned __stdcall SCI_Receive_Thread(void *);
 // 0 : スレッドがループ処理に入らない
 // 1 : スレッドがループ処理に入る
 int RecievedEndFlag = 0;
+// 受け取ったかどうかのフラグ
+bool flag = false;
 
 /*-------- Global parameters --------*/
 std::string SCI_pBufferRecieved;   // 受信した文字のバッファ
@@ -109,16 +111,23 @@ int main()
   /*-------------------------------------
     送信部分
   -------------------------------------*/
+  std::string SCI_pBufferSend;   // 送信する内容を格納したバッファ
+  SCI_pBufferSend = "2\0";
+  //char * sendBuf = "2";
+  DWORD SCI_LengthOfPutOrRecieved;
   while (1)
   {
-    std::string SCI_pBufferSend;   // 送信する内容を格納したバッファ
-    SCI_pBufferSend = "1\0";
-    DWORD SCI_LengthOfPutOrRecieved;
-    // ポートへ送信//「length()」は文字の終わりを表すNULL「\0」を文字の長さとして扱わないので「+1」しておく
-    WriteFile(hComPort, SCI_pBufferSend.c_str(), SCI_pBufferSend.length() + 1, &SCI_LengthOfPutOrRecieved, &sendOverlapped);
+    if (flag)
+    {
+      // ポートへ送信//「length()」は文字の終わりを表すNULL「\0」を文字の長さとして扱わないので「+1」しておく
+      WriteFile(hComPort, SCI_pBufferSend.c_str(), SCI_pBufferSend.length() + 1, &SCI_LengthOfPutOrRecieved, &sendOverlapped);
+      //WriteFile(hComPort, sendBuf, sizeof(sendBuf)+1, &SCI_LengthOfPutOrRecieved, &sendOverlapped);
 
-    printf("SEND__ : %s\n", SCI_pBufferSend.c_str());// 送信した文字列を表示
-    Sleep(100);
+      printf("SEND__ : %s\n\n", SCI_pBufferSend.c_str());// 送信した文字列を表示
+      puts("-------------------------------\n\n");
+      flag = false;
+    }
+    //Sleep(100);
   }
   _getch();// Dos窓を一時停止する。
 
@@ -155,6 +164,13 @@ unsigned __stdcall SCI_Receive_Thread(void *)
   DWORD Event;
 
   while (RecievedEndFlag){
+    // 受信したデータを読み込む
+    DWORD numberOfPut;
+    //「NULL」文字を受信した場合
+    //受信データ数を調べる
+    DWORD errors;
+    COMSTAT comStat;
+
     // 指定した通信デバイスでイベントが発生するのを待機します。この関数で監視するイベントは、デバイスのハンドルに関連付けられているイベントマスクによって示されます。
     // WaitCommEvent(hComPort,&Event,&recieveOverlapped);//FILE_FLAG_OVERLAPPEDを指定した場合はoverlapped構造体を指定する必要がある←これをやるとCPU使用率が上がってしまう。
     WaitCommEvent(hComPort, &Event, NULL); // FILE_FLAG_OVERLAPPEDを指定した場合はoverlapped構造体を指定する必要がある
@@ -163,33 +179,32 @@ unsigned __stdcall SCI_Receive_Thread(void *)
 
     if (Event == EV_RXFLAG/*EV_RXCHAR*/)
     {
-      //「NULL」文字を受信した場合
-      //受信データ数を調べる
-      DWORD errors;
-      COMSTAT comStat;
       ClearCommError(hComPort, &errors, &comStat);
       int lengthOfRecieved = comStat.cbInQue; // 受信したメッセージ長を取得する
+      //printf("読み取ったバイト数 : %d\n", lengthOfRecieved);
 
-      //受信したデータを読み込む
-      DWORD numberOfPut;
       // バッファから取り込み
       ReadFile(hComPort, (LPVOID*)SCI_pBufferRecieved.c_str(), lengthOfRecieved, &numberOfPut, &recieveOverlapped);
       // 何故だかわからないけど文字数が0となってしまっていたので対処療法で数を代入してみる。//つまり、これをしないとlength()で正しい文字数が帰って来ない。
       SCI_pBufferRecieved._Mysize = lengthOfRecieved;
+      printf("RECEIVE : %s, %d\n", SCI_pBufferRecieved.c_str(), SCI_pBufferRecieved.length());
 
-      printf("RECEIVE : %s\n", SCI_pBufferRecieved.c_str());
       // 受信イベントがEV_RXCHARならウインドウメッセージをポストする
       // メッセージを転送先のウインドウのウインドウプロシージャに直接送信します。処理は同期で、転送先のウインドウプロシージャがメッセージを処理し終えるまでは呼び出し元の処理はブロックされます。
       // SendMessage( hWnd, WM_SCI_Receive,(WPARAM)recievedData,(LPARAM)numberOfPut);
       // メッセージを転送先のウインドウのメッセージキューの末尾に送信します。処理は非同期処理で、メッセージを送信した直後から処理を継続することができます。
       // PostMessage(hWnd,WM_SCI_Receive,(WPARAM)recievedData,(LPARAM)numberOfPut);
       // InvalidateRect(hWnd, NULL, FALSE);// 再描画を促す
+      SCI_pBufferRecieved.clear();
+      flag = true;
     }
     else if (Event == EV_ERR)
     {
       //エラーが発生した場合
       // アイドル、サスペンドになった後の為の処理、これを行わないと復旧後通信不能になる……らしいがまだ確認していない。(http://yatsute.s22.xrea.com/contents/article//everything/pc/program/C_Builder,Windows/windows/Com%83%7C%81%5B%83g/%90V%8BK%C3%B7%BD%C4%95%B6%8F%91.txt)
       PurgeComm(hComPort, PURGE_TXABORT | PURGE_RXABORT | PURGE_TXCLEAR | PURGE_RXCLEAR);
+
+      //puts("Receive error!!!\n");
     }
   }
   //ExitThread(0);
