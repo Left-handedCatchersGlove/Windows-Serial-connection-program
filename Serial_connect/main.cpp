@@ -13,7 +13,7 @@ int main (void)
   serial_t obj = serial_create("COM3",9600);
   // 受け取る配列
   char rbuf[DATA_SIZE];
-  char *sbuf = "test";
+  char *sbuf = "0";
   unsigned char testSbuf = 0x0F;
   // 受け取ったバイト数
   char len;
@@ -27,20 +27,25 @@ int main (void)
   {
     /*------------- 受信部分 -------------*/
     // バイト数を受け取るとともに、データを受け取る
-    len = serial_recv(obj, rbuf, sizeof(rbuf));
+    //    len = serial_recv(obj, rbuf, sizeof(rbuf));
+    while (0 == (len = serial_recv(obj, rbuf, 1))) {};
 
+#ifdef OK
+    printf("len : %d\n", len);
     for (i = 0; i < len; i++)
     {
-      printf("but[i] : %d\n", i, rbuf[i]);
+      printf("but[%d] : 0x%2x\n", i, rbuf[i]);
     }
-    printf("len : %d\n", len);
+#endif
+      serial_send(obj, (unsigned char *)sbuf, sizeof(sbuf));
+    
 
     /*------------- 送信部分 -------------*/
     //serial_send(obj, (unsigned char *)sbuf, sizeof(sbuf));
-    serial_send(obj, &testSbuf, sizeof(sbuf));
-    Sleep(100);
+    //serial_send(obj, &testSbuf, sizeof(sbuf));
+//    Sleep(10);
 
-    if ( kbhit() )  break;
+//    if ( kbhit() )  break;
   }
 
 
