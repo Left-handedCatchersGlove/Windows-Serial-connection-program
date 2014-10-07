@@ -124,10 +124,10 @@ int main()
       //WriteFile(hComPort, sendBuf, sizeof(sendBuf)+1, &SCI_LengthOfPutOrRecieved, &sendOverlapped);
 
       printf("SEND__ : %s\n\n", SCI_pBufferSend.c_str());// ‘—M‚µ‚½•¶š—ñ‚ğ•\¦
-      puts("-------------------------------\n\n");
+      puts("-------------------------------\n");
       flag = false;
     }
-    //Sleep(100);
+    Sleep(100);
   }
   _getch();// Dos‘‹‚ğˆê’â~‚·‚éB
 

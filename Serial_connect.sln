@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loopBackTest", "loopBackTes
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "new_serial_connect_prog", "new_serial_connect_prog\new_serial_connect_prog.vcxproj", "{74CD0932-4640-4F1A-B888-0BD9433066F2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simpleReceiveAndSend", "simpleReceiveAndSend\simpleReceiveAndSend.vcxproj", "{1EF81878-7F12-48A9-BA2F-9B76F11A9330}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -27,6 +29,10 @@ Global
 		{74CD0932-4640-4F1A-B888-0BD9433066F2}.Debug|Win32.Build.0 = Debug|Win32
 		{74CD0932-4640-4F1A-B888-0BD9433066F2}.Release|Win32.ActiveCfg = Release|Win32
 		{74CD0932-4640-4F1A-B888-0BD9433066F2}.Release|Win32.Build.0 = Release|Win32
+		{1EF81878-7F12-48A9-BA2F-9B76F11A9330}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1EF81878-7F12-48A9-BA2F-9B76F11A9330}.Debug|Win32.Build.0 = Debug|Win32
+		{1EF81878-7F12-48A9-BA2F-9B76F11A9330}.Release|Win32.ActiveCfg = Release|Win32
+		{1EF81878-7F12-48A9-BA2F-9B76F11A9330}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
