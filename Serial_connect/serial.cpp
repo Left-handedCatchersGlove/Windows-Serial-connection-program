@@ -31,7 +31,7 @@ DWORD WINAPI serial_thread(LPVOID param);
 
 /* 1次バッファ */
 // 欲しいデータ数+1
-#define SERIAL_TMP_BUFSIZE	3
+#define SERIAL_TMP_BUFSIZE	20
 
 /* シリアル通信を開始 */
 serial_t serial_create(char *pname, unsigned int baud)

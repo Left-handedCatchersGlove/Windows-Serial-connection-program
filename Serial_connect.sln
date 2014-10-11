@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "new_serial_connect_prog", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simpleReceiveAndSend", "simpleReceiveAndSend\simpleReceiveAndSend.vcxproj", "{1EF81878-7F12-48A9-BA2F-9B76F11A9330}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "serial", "serial\serial.vcxproj", "{23DC6147-EDBD-4B11-AFD8-0FBB8CFF4367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -33,6 +35,10 @@ Global
 		{1EF81878-7F12-48A9-BA2F-9B76F11A9330}.Debug|Win32.Build.0 = Debug|Win32
 		{1EF81878-7F12-48A9-BA2F-9B76F11A9330}.Release|Win32.ActiveCfg = Release|Win32
 		{1EF81878-7F12-48A9-BA2F-9B76F11A9330}.Release|Win32.Build.0 = Release|Win32
+		{23DC6147-EDBD-4B11-AFD8-0FBB8CFF4367}.Debug|Win32.ActiveCfg = Debug|Win32
+		{23DC6147-EDBD-4B11-AFD8-0FBB8CFF4367}.Debug|Win32.Build.0 = Debug|Win32
+		{23DC6147-EDBD-4B11-AFD8-0FBB8CFF4367}.Release|Win32.ActiveCfg = Release|Win32
+		{23DC6147-EDBD-4B11-AFD8-0FBB8CFF4367}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

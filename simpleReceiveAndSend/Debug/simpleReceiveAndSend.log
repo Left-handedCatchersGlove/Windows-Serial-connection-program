@@ -1,8 +1,11 @@
-﻿2014/10/07 19:26:58 にビルドを開始しました。
-     1>ノード 3 上のプロジェクト "E:\Desktop\Windows-Serial-connection-program\simpleReceiveAndSend\simpleReceiveAndSend.vcxproj" (Build ターゲット)。
+﻿2014/10/08 16:53:56 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "E:\Desktop\Windows-Serial-connection-program\simpleReceiveAndSend\simpleReceiveAndSend.vcxproj" (Build ターゲット)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
+     1>e:\desktop\windows-serial-connection-program\simplereceiveandsend\main.cpp(43): warning C4101: 'errors' : ローカル変数は 1 度も使われていません。
+     1>e:\desktop\windows-serial-connection-program\simplereceiveandsend\main.cpp(44): warning C4101: 'comStat' : ローカル変数は 1 度も使われていません。
+     1>e:\desktop\windows-serial-connection-program\simplereceiveandsend\main.cpp(41): warning C4101: 'numberOfPut' : ローカル変数は 1 度も使われていません。
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Desktop\Windows-Serial-connection-program\Debug\simpleReceiveAndSend.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Desktop\Windows-Serial-connection-program\Debug\simpleReceiveAndSend.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Desktop\Windows-Serial-connection-program\Debug\simpleReceiveAndSend.lib" /MACHINE:X86 Debug\main.obj
          simpleReceiveAndSend.vcxproj -> E:\Desktop\Windows-Serial-connection-program\Debug\simpleReceiveAndSend.exe
@@ -10,4 +13,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:00.94
+経過時間 00:00:00.93

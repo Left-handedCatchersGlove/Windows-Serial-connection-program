@@ -2,7 +2,7 @@
 #define _FIFO_H_
 
 // 欲しいデータ数+1
-#define FIFO_BUFSIZE	3
+#define FIFO_BUFSIZE	20
 
 /* FIFOデータ構造 */
 typedef struct _TAG_FIFO {

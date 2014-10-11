@@ -6,6 +6,7 @@
 
 #define DATA_SIZE 10
 
+#define OK true
 int main (void)
 {
   int i = 0;
@@ -28,7 +29,7 @@ int main (void)
     /*------------- 受信部分 -------------*/
     // バイト数を受け取るとともに、データを受け取る
     //    len = serial_recv(obj, rbuf, sizeof(rbuf));
-    while (0 == (len = serial_recv(obj, rbuf, 1))) {};
+    while (0 == (len = serial_recv(obj, rbuf, 20))) {};
 
 #ifdef OK
     printf("len : %d\n", len);
@@ -37,13 +38,13 @@ int main (void)
       printf("but[%d] : 0x%2x\n", i, rbuf[i]);
     }
 #endif
-      serial_send(obj, (unsigned char *)sbuf, sizeof(sbuf));
+     // serial_send(obj, (unsigned char *)sbuf, sizeof(sbuf));
     
 
     /*------------- 送信部分 -------------*/
     //serial_send(obj, (unsigned char *)sbuf, sizeof(sbuf));
     //serial_send(obj, &testSbuf, sizeof(sbuf));
-//    Sleep(10);
+   Sleep(500);
 
 //    if ( kbhit() )  break;
   }
